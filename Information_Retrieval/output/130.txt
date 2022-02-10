@@ -1,0 +1,1 @@
+<TITLE>ImagemapError</TITLE><H1>ImagemapError</H1>Yourclientdidnotsendanycoordinates.Eitheryourclientdoesn'tsupportimagemaporthemapfilewasnotaccessedasamap.
