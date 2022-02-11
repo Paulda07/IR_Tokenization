@@ -10,19 +10,30 @@ assert os.path.exists(sys.argv[1]), "I did not find the output directory at, "+s
 
 input_directory = sys.argv[1]
 output_directory = sys.argv[2]
+
+vocabulary = []
 for input_filename in os.listdir(input_directory):
     input_file = os.path.join(input_directory, input_filename)
     # checking if it is a file
+    #print('CLEARRRRRRRRRRRRR')
     assert os.path.isfile(input_file), "The files in the input directory are corrupted"
-    file_content = open(input_file).read()
+    file_content = open(input_file, errors="ignore").read()
     # print(file_content)
-    soup = BeautifulSoup(file_content)
+    soup = BeautifulSoup(file_content, "html.parser")
     text = soup.get_text()
-    print(text)
-    # tokens = nltk.word_tokenize(text)
+    #print(text)
+    #tokens = nltk.word_tokenize(text)
     tokens = wordpunct_tokenize(text)
-    print (tokens)
+    #print (tokens[52])
     output_filename = os.path.join(output_directory, input_filename[:3]+".txt")
     output_file = open(output_filename, "w")
+    iterator = 0
+    while iterator < len(tokens):
+        if not tokens[iterator].isalpha():
+            tokens.pop(iterator)
+            continue
+        iterator +=1
     output_file.writelines("%s\n" % token for token in tokens)
     output_file.close()
+
+    
